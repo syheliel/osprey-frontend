@@ -24,11 +24,13 @@ function Codeparameter(props) {
         ws.onopen = function (evt) {
             console.log("连接开始")
             sendMessage();
+            changeConnected(true)         // 修改连接状态
         }
-        changeConnected("true")         // 修改连接状态
         onMessageReceived();
         ws.onclose = function () {
             console.log("连接已关闭...");
+            changeConnected(false)
+            changeInfo(" ")
             handleClick()
         }
     }
@@ -65,7 +67,6 @@ function Codeparameter(props) {
     // websocket 关闭连接
     const onClose = () => {
         setVisible(false);
-        changeConnected("true")
     };
     
     const [values, setValues] = useState({

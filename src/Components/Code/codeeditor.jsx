@@ -190,7 +190,7 @@ function Editor(props) {
     const [compile_info, setcompile_info] = useState("")
     const [buyFlag, setbuyFlag] = useState(false)
     const [userProgram, setuserProgram] = useState("def fun(data):\n  return 1")
-    const [isNotConnected, setisNotConnected] = useState("false")
+    const [isConnected, setisConnected] = useState(false)
 
     const SelectTheme = ({ onChange }) => {
         return (
@@ -292,10 +292,9 @@ function Editor(props) {
             </Space>
         </div>)
     }
+
     function ConnectStatus(props) {
-        const isNotConnected2 = { isNotConnected };
-        console.log("connect", isNotConnected2)
-        if (isNotConnected2 === "false")
+        if (isConnected)
             return <Connected />
         else
             return <DisConnected />
@@ -361,7 +360,7 @@ function Editor(props) {
                 <SelectLanguage value={mode} onChange={onChangeLanguage} />
                 <Button icon={<UploadOutlined />} onClick={setFileVisible} >上传程序</Button>
                 <Button icon={<UploadOutlined />} onClick={setFileVisible2} >上传验证程序</Button>
-                <Codeparameter changeConnected={(isNotConnected) => setisNotConnected(isNotConnected)} program={verify_program} verify_program={userProgram} compile_info={compile_info} changeInfo={(compile_info) => setcompile_info(compile_info)}></Codeparameter>
+                <Codeparameter changeConnected={(isConnected) => setisConnected(isConnected)} program={verify_program} verify_program={userProgram} compile_info={compile_info} changeInfo={(compile_info) => setcompile_info(compile_info)}></Codeparameter>
                 <input type="file" className="file" onChange={my_fileReader} id="file-upload" style={{ display: 'none' }} />
                 <input type="file" className="file" onChange={my_fileReader2} id="file-upload2" style={{ display: 'none' }} />
                 <Divider />
@@ -409,6 +408,7 @@ function Editor(props) {
                 <TextArea rows={10} value={compile_info} id='result'></TextArea>
             </div>
             <div className="connect-status">
+                {/* <Button icon={<FormOutlined />} onClick={changeConnected2} >example</Button> */}
                 <ConnectStatus />
             </div>
         </div>
