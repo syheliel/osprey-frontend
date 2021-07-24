@@ -7,6 +7,15 @@
   font-size: 18px;
 }
 
+.Purchase {
+  display: flex;
+  margin-bottom: 20px;
+  width:940px;
+}
+
+.Purchase .Purchase-2{
+  margin-right: 25px;
+}
 .CodeMirror-scroll {
   min-height: 630px;
 }
@@ -26,8 +35,6 @@
   color: #f8f8f2;
 }
 
-
-/* .singlefunction-toolBar {
-  border: 1px solid;
-  height: 20px;
-} */
+.example{
+  margin-right: 10px;
+}

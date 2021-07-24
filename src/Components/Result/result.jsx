@@ -1,8 +1,18 @@
-import { Result, Button } from 'antd';
+import {
+    Result, Button, notification,
+    Space
+} from 'antd';
 import React from 'react'
+const openNotificationWithIcon = (type) => {
+    notification[type]({
+        message: "程序运行成功",
+        description:
+            "运行结果为 average : 75\n已将钱转入对方账户",
+    });
+};
 function MyResult() {
     return (
-        <div className = "result">
+        <div className="result">
             <Result
                 status="success"
                 title="Successfully Purchased Cloud Server on Osprey!"
@@ -11,7 +21,7 @@ function MyResult() {
                     <Button type="primary" key="console" href="/">
                         Go Console
       </Button>,
-                    <Button key="buy">Buy Again</Button>,
+                    <Button key="buy" onClick={() => openNotificationWithIcon('success')}>Buy Again</Button>,
                 ]}
             />
         </div>

@@ -32,7 +32,7 @@ function Codeparameter(props) {
             handleClick()
         }
     }
-    
+
     const onMessageReceived = () => {
         ws.onmessage = function (payload) {
             console.log('有消息过来');
@@ -108,7 +108,7 @@ function Codeparameter(props) {
         <>
             <Button type="primary" onClick={showDrawer}>
                 <PlusOutlined /> 输入运行参数
-          </Button>
+            </Button>
             <Drawer
                 title="请输入即将运行的模拟参数"
                 width={720}
@@ -123,10 +123,10 @@ function Codeparameter(props) {
                     >
                         <Button onClick={onClose} style={{ marginRight: 8 }}>
                             Cancel
-                </Button>
+                        </Button>
                         <Button type="primary" htmlType="submit" onClick={onSubmit} >
                             Submit
-                </Button>
+                        </Button>
                     </div>
                 }
             >
@@ -225,7 +225,7 @@ function Codeparameter(props) {
                                 ]
                                 }
                             >
-                                <Input.TextArea rows={25} placeholder={verify_program.toString()} onChange={onChange} name="userProgram" value={verify_program}/>
+                                <Input.TextArea rows={25} placeholder={verify_program.toString()} onChange={onChange} name="userProgram" value={verify_program} />
                             </Form.Item>
                         </Col>
                     </Row>

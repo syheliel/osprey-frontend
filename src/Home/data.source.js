@@ -252,7 +252,7 @@ export const Teams10DataSource = {
               className: "teams1-title",
               children: (
                 <span>
-                  <p>马越</p>
+                  <p>蒋天晟</p>
                 </span>
               ),
             },
@@ -261,7 +261,7 @@ export const Teams10DataSource = {
               className: "teams1-job",
               children: (
                 <span>
-                  <p>华东师范大学-17-数据科学</p>
+                  <p>1s3efi@e</p>
                 </span>
               ),
             },
@@ -300,7 +300,7 @@ export const Teams10DataSource = {
               className: "teams1-job",
               children: (
                 <span>
-                  <p>华东师范大学-18-卓越班</p>
+                  <p>1s3efi@e</p>
                 </span>
               ),
             },
@@ -339,7 +339,7 @@ export const Teams10DataSource = {
               className: "teams1-job",
               children: (
                 <span>
-                  <p>华东师范大学-18-软件科学</p>
+                  <p>1s3efi@e</p>
                 </span>
               ),
             },
@@ -375,7 +375,7 @@ export const Content30DataSource = {
         className: "title-content",
         children: (
           <span>
-            <p>基于华东师范大学强大的基础资源</p>
+            <p>强大的基础资源</p>
           </span>
         ),
       },
@@ -521,7 +521,7 @@ export const Feature50DataSource = {
       },
       {
         name: "content",
-        children: "基于华东师范大学数据科学学院强大的基础资源",
+        children: "强大的基础资源",
       },
     ],
   },

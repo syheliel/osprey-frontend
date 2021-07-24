@@ -10,7 +10,7 @@ import 'codemirror/theme/monokai.css';
 import 'codemirror/theme/ambiance.css';
 import "./codeeditor.css";
 import { Select, BackTop } from 'antd';
-import { Divider } from 'antd';
+import { Divider, InputNumber, Input, Tooltip, Modal } from 'antd';
 import Codeparameter from './codeparameter';
 import 'codemirror/theme/3024-day.css';
 import 'codemirror/theme/3024-night.css';
@@ -70,6 +70,7 @@ import 'codemirror/theme/zenburn.css';
 import TextArea from 'antd/lib/input/TextArea';
 import { Upload, message, Button } from 'antd';
 import { UploadOutlined, VerticalAlignTopOutlined } from '@ant-design/icons';
+import { InfoCircleOutlined, UserOutlined, SendOutlined, FormOutlined } from '@ant-design/icons';
 const { Option } = Select;
 
 const setFontSizeByClassName = (value) => {
@@ -187,6 +188,7 @@ function Editor(props) {
     const [theme, setTheme] = useState('monokai')
     const [mode, setmode] = useState('python')
     const [compile_info, setcompile_info] = useState("")
+    const [buyFlag, setbuyFlag] = useState(false)
     const [userProgram, setuserProgram] = useState("def fun(data):\n  return 1")
 
     const SelectTheme = ({ onChange }) => {
@@ -269,12 +271,59 @@ function Editor(props) {
             if (anchorElement) { anchorElement.scrollIntoView({ block: 'start', behavior: 'smooth' }); }
         }
     }
-
+    const confirmBuy = function () {
+        setbuyFlag(true)
+        let secondsToGo = 5;
+        const modal = Modal.success({
+            title: '购买详情',
+            content: `恭喜您购买成功`,
+        });
+        const timer = setInterval(() => {
+            secondsToGo -= 1;
+        }, 1000);
+        setTimeout(() => {
+            clearInterval(timer);
+            modal.destroy();
+        }, secondsToGo * 1000);
+    }
     return (
         <div >
             <BackTop >
                 <Button type="Link" icon={<VerticalAlignTopOutlined />} />
             </BackTop>
+            <div className="Purchase">
+                <div className="Purchase-1">
+                    <Input.Group compact>
+                        <Input style={{ width: '40%' }} defaultValue="输入资金数:" disabled="false" />
+                        <InputNumber
+                            style={{ width: '60%' }}
+                            defaultValue={1000}
+                            formatter={value => `wei ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                            parser={value => value.replace(/\wei\s?|(,*)/g, '')} size="middle"
+                        />
+                    </Input.Group>
+                </div>
+                <div className="Purchase-2">
+                    <Input.Group compact>
+                        <Input style={{ width: '40%' }} defaultValue="用户私钥:" disabled="false" />
+                        <Input
+                            style={{ width: '60%' }}
+                            placeholder="输入您的私钥"
+                            prefix={<UserOutlined className="site-form-item-icon" />}
+                            suffix={
+                                <Tooltip title="Extra information">
+                                    <InfoCircleOutlined style={{ color: 'rgba(0,0,0,.45)' }} />
+                                </Tooltip>
+                            }
+                        />
+                    </Input.Group>
+                </div>
+                <Button className="example" icon={<FormOutlined />} onClick={setExample1} >填入示例1</Button>
+                <Button className="example" icon={<FormOutlined />} onClick={setExample2} >填入示例2</Button>
+                <Button type="primary" shape="round" icon={<SendOutlined />} onClick={confirmBuy}>
+                    确认购买
+                </Button>
+            </div>
             <div className="ToolBar">
                 <SelectTabSize value={tabSize} onChange={onChangeTabSize} />
                 <SelectTheme value={theme} onChange={onChangeCodeTheme} />
@@ -287,8 +336,7 @@ function Editor(props) {
                 <input type="file" className="file" onChange={my_fileReader} id="file-upload" style={{ display: 'none' }} />
                 <input type="file" className="file" onChange={my_fileReader2} id="file-upload2" style={{ display: 'none' }} />
                 <Divider />
-                <Button icon={<UploadOutlined />} onClick={setExample1} >填入示例1</Button>
-                <Button icon={<UploadOutlined />} onClick={setExample2} >填入示例2</Button>
+
             </div>
             <div id='program1' >
                 <CodeMirror
