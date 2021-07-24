@@ -5,11 +5,7 @@ import { PlusOutlined } from '@ant-design/icons';
 import io from 'socket.io-client'
 const { Option } = Select;
 
-var stompClient = null; // 设置 STOMP 客户端
-var SOCKET_ENDPOINT = "/osprey"; // 设置 WebSocket 进入端点
 var SUBSCRIBE_PREFIX = "/topic/public" // 设置订阅消息的请求前缀
-var SUBSCRIBE = ""; // 设置订阅消息的请求地址
-var SEND_ENDPOINT = "/app/test"; // 设置服务器端点，访问服务器中哪个接口
 var message2 = "";
 var wsUrl = "ws://106.13.125.83:3498/compute_query";//必须以ws开头
 //wsUrl = "ws://localhost:3498/compute_query";//必须以ws开头
@@ -19,20 +15,24 @@ function Codeparameter(props) {
     const [visible, setVisible] = useState(false);
     const [error, seterror] = useState("");
     const [channelConnected, setchannelConnected] = useState(false)
-    const { compile_info, changeInfo } = props;
+    const { compile_info, changeInfo, changeConnected } = props;
+    const { program } = props;
+    const { verify_program } = props;
+    // websocket 连接
     const connect = () => {
         ws = new WebSocket(wsUrl);
         ws.onopen = function (evt) {
             console.log("连接开始")
             sendMessage();
         }
+        changeConnected("true")         // 修改连接状态
         onMessageReceived();
         ws.onclose = function () {
             console.log("连接已关闭...");
             handleClick()
         }
     }
-
+    // websocket 接收后端消息
     const onMessageReceived = () => {
         ws.onmessage = function (payload) {
             console.log('有消息过来');
@@ -41,8 +41,8 @@ function Codeparameter(props) {
             changeInfo(compile_info + message2);
         }
     }
+    // websocket 设置待发送的消息内容
     const sendMessage = () => {
-        // 设置待发送的消息内容
         var message3 = {
             "register_count": parseInt(values.register_count),
             "tinyram_input_size_bound": Number(values.tinyram_input_size_bound),
@@ -57,16 +57,17 @@ function Codeparameter(props) {
         console.log("bbbb", JSON.stringify(message3))
         ws.send(JSON.stringify(message3));
     }
-
-    const { program } = props;
-    const { verify_program } = props;
+    // 展示侧边栏抽屉
     const showDrawer = () => {
         setVisible(true);
     };
 
+    // websocket 关闭连接
     const onClose = () => {
         setVisible(false);
+        changeConnected("true")
     };
+    
     const [values, setValues] = useState({
         register_count: 16,
         word_size: 16,
@@ -102,7 +103,8 @@ function Codeparameter(props) {
     }
     let history = useHistory();
     function handleClick() {
-        history.push("/result");
+        // history.push("/result");
+
     }
     return (
         <>

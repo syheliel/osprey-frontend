@@ -38,3 +38,6 @@
 .example{
   margin-right: 10px;
 }
+.connect-status {
+  float: right;
+}

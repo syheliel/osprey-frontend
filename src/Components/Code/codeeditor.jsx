@@ -9,7 +9,7 @@ import 'codemirror/addon/hint/show-hint.js';
 import 'codemirror/theme/monokai.css';
 import 'codemirror/theme/ambiance.css';
 import "./codeeditor.css";
-import { Select, BackTop } from 'antd';
+import { Select, BackTop, Space } from 'antd';
 import { Divider, InputNumber, Input, Tooltip, Modal } from 'antd';
 import Codeparameter from './codeparameter';
 import 'codemirror/theme/3024-day.css';
@@ -69,8 +69,8 @@ import 'codemirror/theme/yeti.css';
 import 'codemirror/theme/zenburn.css';
 import TextArea from 'antd/lib/input/TextArea';
 import { Upload, message, Button } from 'antd';
-import { UploadOutlined, VerticalAlignTopOutlined } from '@ant-design/icons';
-import { InfoCircleOutlined, UserOutlined, SendOutlined, FormOutlined } from '@ant-design/icons';
+import { UploadOutlined, VerticalAlignTopOutlined, CloseCircleOutlined } from '@ant-design/icons';
+import { InfoCircleOutlined, UserOutlined, SendOutlined, FormOutlined, CheckCircleTwoTone } from '@ant-design/icons';
 const { Option } = Select;
 
 const setFontSizeByClassName = (value) => {
@@ -190,6 +190,7 @@ function Editor(props) {
     const [compile_info, setcompile_info] = useState("")
     const [buyFlag, setbuyFlag] = useState(false)
     const [userProgram, setuserProgram] = useState("def fun(data):\n  return 1")
+    const [isNotConnected, setisNotConnected] = useState("false")
 
     const SelectTheme = ({ onChange }) => {
         return (
@@ -271,6 +272,34 @@ function Editor(props) {
             if (anchorElement) { anchorElement.scrollIntoView({ block: 'start', behavior: 'smooth' }); }
         }
     }
+    function Connected(props) {
+        return (<div id="connected">
+            <Space>
+                <CheckCircleTwoTone twoToneColor="#52c41a" />
+                <Tooltip title="连接状态">
+                    <span>当前连接状态为: 已连接</span>
+                </Tooltip>
+            </Space>
+        </div>)
+    }
+    function DisConnected(props) {
+        return (<div id="disconnected">
+            <Space>
+                <CloseCircleOutlined style={{ color: "red" }} />
+                <Tooltip title="连接状态">
+                    <span>当前连接状态为: 未连接</span>
+                </Tooltip>
+            </Space>
+        </div>)
+    }
+    function ConnectStatus(props) {
+        const isNotConnected2 = { isNotConnected };
+        console.log("connect", isNotConnected2)
+        if (isNotConnected2 === "false")
+            return <Connected />
+        else
+            return <DisConnected />
+    }
     const confirmBuy = function () {
         setbuyFlag(true)
         let secondsToGo = 5;
@@ -332,7 +361,7 @@ function Editor(props) {
                 <SelectLanguage value={mode} onChange={onChangeLanguage} />
                 <Button icon={<UploadOutlined />} onClick={setFileVisible} >上传程序</Button>
                 <Button icon={<UploadOutlined />} onClick={setFileVisible2} >上传验证程序</Button>
-                <Codeparameter program={verify_program} verify_program={userProgram} compile_info={compile_info} changeInfo={(compile_info) => setcompile_info(compile_info)}></Codeparameter>
+                <Codeparameter changeConnected={(isNotConnected) => setisNotConnected(isNotConnected)} program={verify_program} verify_program={userProgram} compile_info={compile_info} changeInfo={(compile_info) => setcompile_info(compile_info)}></Codeparameter>
                 <input type="file" className="file" onChange={my_fileReader} id="file-upload" style={{ display: 'none' }} />
                 <input type="file" className="file" onChange={my_fileReader2} id="file-upload2" style={{ display: 'none' }} />
                 <Divider />
@@ -378,6 +407,9 @@ function Editor(props) {
             </div>
             <div>
                 <TextArea rows={10} value={compile_info} id='result'></TextArea>
+            </div>
+            <div className="connect-status">
+                <ConnectStatus />
             </div>
         </div>
     )
