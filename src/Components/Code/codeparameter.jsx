@@ -12,11 +12,12 @@ var wsUrl = "ws://106.13.125.83:3498/compute_query";//必须以ws开头
 let ws;
 
 function Codeparameter(props) {
+    console.log(props)
     const [visible, setVisible] = useState(false);
     const [error, seterror] = useState("");
     const [channelConnected, setchannelConnected] = useState(false)
     const { compile_info, changeInfo, changeConnected } = props;
-    const { program } = props;
+    const { userProgram } = props;
     const { verify_program } = props;
     // websocket 连接
     const connect = () => {
@@ -30,7 +31,7 @@ function Codeparameter(props) {
         ws.onclose = function () {
             console.log("连接已关闭...");
             changeConnected(false)
-            changeInfo(" ")
+            // changeInfo(" ")
             handleClick()
         }
     }
@@ -51,7 +52,7 @@ function Codeparameter(props) {
             "word_size": Number(values.word_size),
             "verify_program": verify_program,
             "tinyram_program_size_bound": Number(values.tinyram_program_size_bound),
-            "program": program,
+            "program": userProgram,
             "time_bound": 64,
             "destination": SUBSCRIBE_PREFIX
         }
@@ -91,6 +92,7 @@ function Codeparameter(props) {
         console.log("hzr", JSON.stringify(values))
     };
     const onSubmit = (e) => {
+        //changeInfo(""); // clear output first
         connect();
         onClose();
         scrollToAnchor('result');
@@ -201,7 +203,7 @@ function Codeparameter(props) {
                             <Form.Item
                                 name="verify_program"
                                 label="verify_program"
-                                initialValue={program.toString()}
+                                initialValue={verify_program.toString()}
                                 rules={[
                                     {
                                         required: true,
@@ -210,7 +212,7 @@ function Codeparameter(props) {
                                 ]
                                 }
                             >
-                                <Input.TextArea rows={25} placeholder={program.toString()} onChange={onChange} name="verify_program" value={program} />
+                                <Input.TextArea rows={25} placeholder={verify_program.toString()} onChange={onChange} name="verify_program" value={verify_program} />
                             </Form.Item>
                         </Col>
                     </Row>
@@ -219,7 +221,7 @@ function Codeparameter(props) {
                             <Form.Item
                                 name="userProgram"
                                 label="userProgram"
-                                initialValue={verify_program.toString()}
+                                initialValue={userProgram.toString()}
                                 rules={[
                                     {
                                         required: true,
@@ -228,7 +230,7 @@ function Codeparameter(props) {
                                 ]
                                 }
                             >
-                                <Input.TextArea rows={25} placeholder={verify_program.toString()} onChange={onChange} name="userProgram" value={verify_program} />
+                                <Input.TextArea rows={25} placeholder={userProgram.toString()} onChange={onChange} name="userProgram" value={userProgram} />
                             </Form.Item>
                         </Col>
                     </Row>
