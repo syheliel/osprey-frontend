@@ -22,6 +22,12 @@ function Codeparameter(props) {
     // websocket 连接
     const connect = () => {
         ws = new WebSocket(wsUrl);
+        changeInfo(" ")
+        // console.log("websocket 状态",ws.readyState)
+        // if (ws.readyState == 1){      //   WebSocket.OPEN 1 连接已开启并准备好进行通信；
+        //     ws.close();
+        //     ws.open();
+        // }
         ws.onopen = function (evt) {
             console.log("连接开始")
             sendMessage();
@@ -32,7 +38,7 @@ function Codeparameter(props) {
             console.log("连接已关闭...");
             changeConnected(false)
             // changeInfo(" ")
-            handleClick()
+            // handleClick()
         }
     }
     // websocket 接收后端消息
@@ -65,7 +71,7 @@ function Codeparameter(props) {
         setVisible(true);
     };
 
-    // websocket 关闭连接
+    // 侧边栏 关闭连接
     const onClose = () => {
         setVisible(false);
     };
@@ -92,7 +98,6 @@ function Codeparameter(props) {
         console.log("hzr", JSON.stringify(values))
     };
     const onSubmit = (e) => {
-        //changeInfo(""); // clear output first
         connect();
         onClose();
         scrollToAnchor('result');
@@ -104,11 +109,11 @@ function Codeparameter(props) {
             if (anchorElement) { anchorElement.scrollIntoView({ block: 'start', behavior: 'smooth' }); }
         }
     }
-    let history = useHistory();
-    function handleClick() {
-        // history.push("/result");
+    // let history = useHistory();
+    // function handleClick() {
+    //     // history.push("/result");
 
-    }
+    // }
     return (
         <>
             <Button type="primary" onClick={showDrawer}>
