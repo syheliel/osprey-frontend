@@ -1,5 +1,5 @@
 import CodeMirror from '@uiw/react-codemirror';
-import { useState } from 'react';
+import { useState,useCallback,useEffect } from 'react';
 import 'codemirror/addon/display/autorefresh';
 import 'codemirror/addon/comment/comment';
 import 'codemirror/addon/edit/matchbrackets';
@@ -314,6 +314,9 @@ function Editor(props) {
             modal.destroy();
         }, secondsToGo * 1000);
     }
+    // let changeInfo = (compile_info) => {
+    //     setcompile_info(compile_info)
+    // };
     return (
         <div >
             <BackTop >
@@ -360,12 +363,15 @@ function Editor(props) {
                 <SelectLanguage value={mode} onChange={onChangeLanguage} />
                 <Button icon={<UploadOutlined />} onClick={setFileVisible} >上传程序</Button>
                 <Button icon={<UploadOutlined />} onClick={setFileVisible2} >上传验证程序</Button>
-                
                 <Codeparameter changeConnected={(isConnected) => setisConnected(isConnected)} userProgram={userProgram} verify_program={verify_program} compile_info={compile_info} changeInfo={(compile_info) => setcompile_info(compile_info)}></Codeparameter>
+                {/* <Codeparameter changeConnected={(isConnected) => setisConnected(isConnected)} userProgram={userProgram} verify_program={verify_program} compile_info={compile_info} changeInfo={(compile_info) => setTimeout(()=>{setcompile_info(compile_info)},0)}></Codeparameter> */}
+                {/* <Codeparameter changeConnected={(isConnected) => setisConnected(isConnected)} userProgram={userProgram} verify_program={verify_program} compile_info={compile_info} changeInfo={changeInfo}></Codeparameter> */}
                 <input type="file" className="file" onChange={my_fileReader} id="file-upload" style={{ display: 'none' }} />
                 <input type="file" className="file" onChange={my_fileReader2} id="file-upload2" style={{ display: 'none' }} />
+            </div>
+            <div className="Tips">
+                Tips: 数据为整数数组List[int]，示例数据的值为[2,4,6,8,10]
                 <Divider />
-
             </div>
             <div id='program1' >
                 <CodeMirror

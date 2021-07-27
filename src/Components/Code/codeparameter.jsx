@@ -12,23 +12,24 @@ var wsUrl = "ws://106.13.125.83:3498/compute_query";//必须以ws开头
 let ws;
 
 function Codeparameter(props) {
-    console.log(props)
+    // console.log(props)
     const [visible, setVisible] = useState(false);
     const [error, seterror] = useState("");
     const [channelConnected, setchannelConnected] = useState(false)
-    const { compile_info, changeInfo, changeConnected } = props;
+    let { compile_info, changeInfo, changeConnected } = props;
     const { userProgram } = props;
     const { verify_program } = props;
     // websocket 连接
     const connect = () => {
-        ws = new WebSocket(wsUrl);
         changeInfo(" ")
+        ws = new WebSocket(wsUrl);
         // console.log("websocket 状态",ws.readyState)
-        // if (ws.readyState == 1){      //   WebSocket.OPEN 1 连接已开启并准备好进行通信；
+        // if (ws.readyState != 1){      //   WebSocket.OPEN 1 连接已开启并准备好进行通信；
         //     ws.close();
         //     ws.open();
         // }
         ws.onopen = function (evt) {
+            console.log("lianjie", compile_info)
             console.log("连接开始")
             sendMessage();
             changeConnected(true)         // 修改连接状态
@@ -37,17 +38,18 @@ function Codeparameter(props) {
         ws.onclose = function () {
             console.log("连接已关闭...");
             changeConnected(false)
-            // changeInfo(" ")
-            // handleClick()
         }
     }
     // websocket 接收后端消息
     const onMessageReceived = () => {
+        changeInfo("")
         ws.onmessage = function (payload) {
             console.log('有消息过来');
             console.log(payload.data);
-            message2 += payload.data;
-            changeInfo(compile_info + message2);
+            compile_info += payload.data;
+            console.log('ysnnb compiler', compile_info)
+            // console.log('ysnnb message2',message2)
+            changeInfo(compile_info);
         }
     }
     // websocket 设置待发送的消息内容
@@ -62,12 +64,13 @@ function Codeparameter(props) {
             "time_bound": 64,
             "destination": SUBSCRIBE_PREFIX
         }
-        console.log("aaaa", message3);
-        console.log("bbbb", JSON.stringify(message3))
+        // console.log("aaaa", message3);
+        // console.log("bbbb", JSON.stringify(message3))
         ws.send(JSON.stringify(message3));
     }
     // 展示侧边栏抽屉
     const showDrawer = () => {
+        changeInfo("")
         setVisible(true);
     };
 
@@ -75,7 +78,7 @@ function Codeparameter(props) {
     const onClose = () => {
         setVisible(false);
     };
-    
+
     const [values, setValues] = useState({
         register_count: 16,
         word_size: 16,
@@ -86,21 +89,26 @@ function Codeparameter(props) {
     });
 
     const onChange = event => {
-        console.log("1", event.target.value)
-        console.log("3", event.target.name)
-        console.log("2", values.word_size)
+        // console.log("1", event.target.value)
+        // console.log("3", event.target.name)
+        // console.log("2", values.word_size)
         setTimeout(() => {
             setValues({ ...values, [event.target.name]: event.target.value })
         }, 0);
-        console.log("4", values.word_size)
-        console.log("5", values.register_count)
-        console.log("6", values.tinyram_program_size_bound)
-        console.log("hzr", JSON.stringify(values))
+        // console.log("4", values.word_size)
+        // console.log("5", values.register_count)
+        // console.log("6", values.tinyram_program_size_bound)
+        // console.log("hzr", JSON.stringify(values))
     };
+
     const onSubmit = (e) => {
-        connect();
-        onClose();
-        scrollToAnchor('result');
+        if (compile_info == "") {
+            connect();
+            onClose();
+            scrollToAnchor('result');
+        }
+        else
+            console.log('fuck', compile_info)
     };
     const scrollToAnchor = (anchorName) => {
         if (anchorName) {
@@ -109,11 +117,6 @@ function Codeparameter(props) {
             if (anchorElement) { anchorElement.scrollIntoView({ block: 'start', behavior: 'smooth' }); }
         }
     }
-    // let history = useHistory();
-    // function handleClick() {
-    //     // history.push("/result");
-
-    // }
     return (
         <>
             <Button type="primary" onClick={showDrawer}>
