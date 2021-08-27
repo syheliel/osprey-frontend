@@ -43,7 +43,7 @@ export default function Loading() {
                 <a href="/code">
                   <Card
                     hoverable
-                    style={{ width: 240, height: 460 }}
+                    style={{ width: 270, height: 480 }}
                     cover={
                       <img
                         alt="example"
@@ -52,9 +52,12 @@ export default function Loading() {
                     }
                   >
                     <Divider plain></Divider>
-                    钱包地址: 0x57128a8c478B3fEab65866a9c39d06408c243ce9
+                    以太坊钱包地址: 0x57128a8c478B3fEab65866a9c39d06408c243ce9
                     <Divider plain></Divider>
-                    <Meta title="公司A" description="激发创造 丰富生活" />
+                    <Meta title="公司A   医疗数据"  />
+                    <Meta description="数据来源：流感患者年龄数据" className="desciption"/>
+                    <Meta description="数据格式：整数数组" className="desciption"/>
+                    <Meta description="数据量级: 5条" className="desciption" />
                   </Card>
                 </a>
               </BouncyDiv>
@@ -64,7 +67,7 @@ export default function Loading() {
                 <a href="/code">
                   <Card
                     hoverable
-                    style={{ width: 240, height: 460 }}
+                    style={{ width: 270, height: 480 }}
                     cover={
                       <img
                         alt="example"
@@ -73,9 +76,12 @@ export default function Loading() {
                     }
                   >
                     <Divider plain></Divider>
-                    钱包地址: 0x57128a8c478B3fEab65866a9c39d06408c243ce9
+                    以太坊钱包地址: 0x57128a8c478B3fEab65866a9c39d06408c243ce9
                     <Divider plain></Divider>
-                    <Meta title="公司B" description="热爱生活 积极进取" />
+                    <Meta title="公司B   轨道数据"  />
+                    <Meta description="数据来源: 某干道车流量平均数据" className="desciption"/>
+                    <Meta description="数据格式: Json数组" className="desciption"/>
+                    <Meta description="数据量级: 5条" className="desciption" />
                   </Card>
                 </a>
               </BouncyDiv>
@@ -85,19 +91,23 @@ export default function Loading() {
                 <a href="/code">
                   <Card
                     hoverable
-                    style={{ width: 240, height: 460 }}
+                    style={{ width: 270, height: 480 }}
                     cover={
                       <img
                         alt="example"
-                        src="http://www.tmtforum.com/uploadfile/ueditor/201606/8eb4881b3c.jpeg"
+                        src="https://doqvf81n9htmm.cloudfront.net/data/crop_article/107301/shutterstock_1173479044.jpg_1140x855.jpg"
+                        style={{height:178}}
                       />
                     }
                   >
                     {" "}
                     <Divider plain></Divider>
-                    钱包地址: 0x57128a8c478B3fEab65866a9c39d06408c243ce9
+                    以太坊钱包地址: 0x57128a8c478B3fEab65866a9c39d06408c243ce9
                     <Divider plain></Divider>
-                    <Meta title="公司C" description="责任，进取，热情，创新" />
+                    <Meta title="公司C   气象数据"  />
+                    <Meta description="数据来源: 上海气象数据" className="desciption"/>
+                    <Meta description="数据格式: 整数数组" className="desciption"/>
+                    <Meta description="数据量级: 5条" className="desciption" />
                   </Card>
                 </a>
               </BouncyDiv>

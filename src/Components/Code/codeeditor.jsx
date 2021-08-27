@@ -1,5 +1,5 @@
 import CodeMirror from '@uiw/react-codemirror';
-import { useState,useCallback,useEffect } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import 'codemirror/addon/display/autorefresh';
 import 'codemirror/addon/comment/comment';
 import 'codemirror/addon/edit/matchbrackets';
@@ -10,7 +10,7 @@ import 'codemirror/theme/monokai.css';
 import 'codemirror/theme/ambiance.css';
 import "./codeeditor.css";
 import { Select, BackTop, Space } from 'antd';
-import { Divider, InputNumber, Input, Tooltip, Modal } from 'antd';
+import { Divider, InputNumber, Input, Tooltip, Modal, Typography } from 'antd';
 import Codeparameter from './codeparameter';
 import 'codemirror/theme/3024-day.css';
 import 'codemirror/theme/3024-night.css';
@@ -72,7 +72,7 @@ import { Upload, message, Button } from 'antd';
 import { UploadOutlined, VerticalAlignTopOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import { InfoCircleOutlined, UserOutlined, SendOutlined, FormOutlined, CheckCircleTwoTone } from '@ant-design/icons';
 const { Option } = Select;
-
+const { Title, Paragraph } = Typography;
 const setFontSizeByClassName = (value) => {
     var obj = document.getElementsByClassName("CodeMirror");
     if (value == '12px') {
@@ -370,29 +370,33 @@ function Editor(props) {
                 <input type="file" className="file" onChange={my_fileReader2} id="file-upload2" style={{ display: 'none' }} />
             </div>
             <div className="Tips">
-                Tips: 数据为整数数组List[int]，示例数据的值为[2,4,6,8,10]
+            <Title level={5} >Tips: 数据为整数数组List[int]，示例数据的值为[2,4,6,8,10]</Title>
                 <Divider />
             </div>
             <div id='program1' >
-                <CodeMirror
-                    value={userProgram}
-                    options={{
-                        fullScreen: true,
-                        tabSize,
-                        theme,
-                        lineNumbers: true,
-                        styleActiveLine: true,
-                        keyMap: "sublime",
-                        mode,
-                        matchBrackets: true,
-                        extraKeys: { "Ctrl-Space": "autocomplete" }//ctrl-space唤起智能提示
-                    }}
-                    onBlur={editor => {
-                        setuserProgram(editor.getValue());
-                    }}
-                />
+                <Title level={2} className="Title">分析程序(Python)</Title>
+                <Paragraph>
+                    <CodeMirror
+                        value={userProgram}
+                        options={{
+                            fullScreen: true,
+                            tabSize,
+                            theme,
+                            lineNumbers: true,
+                            styleActiveLine: true,
+                            keyMap: "sublime",
+                            mode,
+                            matchBrackets: true,
+                            extraKeys: { "Ctrl-Space": "autocomplete" }//ctrl-space唤起智能提示
+                        }}
+                        onBlur={editor => {
+                            setuserProgram(editor.getValue());
+                        }}
+                    />
+                </Paragraph>
             </div>
             <div id='program2'>
+                <Title level={2} className="Title">验证程序(TinyRAM)</Title>
                 <CodeMirror
                     value={verify_program}
                     options={{
