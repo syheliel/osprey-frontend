@@ -64,8 +64,6 @@ function Codeparameter(props) {
             "time_bound": 64,
             "destination": SUBSCRIBE_PREFIX
         }
-        // console.log("aaaa", message3);
-        // console.log("bbbb", JSON.stringify(message3))
         ws.send(JSON.stringify(message3));
     }
     // 展示侧边栏抽屉
@@ -83,22 +81,14 @@ function Codeparameter(props) {
         register_count: 16,
         word_size: 16,
         tinyram_input_size_bound: 25,
-        program: 16,
         time_bound: 64,
         tinyram_program_size_bound: 20
     });
 
     const onChange = event => {
-        // console.log("1", event.target.value)
-        // console.log("3", event.target.name)
-        // console.log("2", values.word_size)
         setTimeout(() => {
             setValues({ ...values, [event.target.name]: event.target.value })
         }, 0);
-        // console.log("4", values.word_size)
-        // console.log("5", values.register_count)
-        // console.log("6", values.tinyram_program_size_bound)
-        // console.log("hzr", JSON.stringify(values))
     };
 
     const onSubmit = (e) => {
@@ -169,11 +159,11 @@ function Codeparameter(props) {
                     <Row gutter={16}>
                         <Col span={12}>
                             <Form.Item
-                                name="time_bound"
-                                label="Time_bound"
-                                rules={[{ required: true, message: 'Please enter Time bound' }]}
+                                name="tinyram_input_size_bound"
+                                label="Tinyram_input_size_bound"
+                                rules={[{ required: true, message: 'Please enter Tinyram input size bound' }]}
                             >
-                                <Input placeholder={values.time_bound} onChange={onChange} name="time_bound" value={values.time_bound} />
+                                <Input placeholder={values.tinyram_input_size_bound} onChange={onChange} name="tinyram_input_size_bound" value={values.tinyram_input_size_bound} />
                             </Form.Item>
                         </Col>
                         <Col span={12}>
@@ -189,11 +179,11 @@ function Codeparameter(props) {
                     <Row gutter={16}>
                         <Col span={12}>
                             <Form.Item
-                                name="tinyram_input_size_bound"
-                                label="Tinyram_input_size_bound"
-                                rules={[{ required: true, message: 'Please enter Tinyram input size bound' }]}
+                                name="time_bound"
+                                label="Time_bound"
+                                rules={[{ required: true, message: 'Please enter Time bound' }]}
                             >
-                                <Input placeholder={values.tinyram_input_size_bound} onChange={onChange} name="tinyram_input_size_bound" value={values.tinyram_input_size_bound} />
+                                <Input placeholder={values.time_bound} onChange={onChange} name="time_bound" value={values.time_bound} />
                             </Form.Item>
                         </Col>
                     </Row>

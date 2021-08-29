@@ -364,6 +364,8 @@ function Editor(props) {
                 <Button icon={<UploadOutlined />} onClick={setFileVisible} >上传程序</Button>
                 <Button icon={<UploadOutlined />} onClick={setFileVisible2} >上传验证程序</Button>
                 <Codeparameter changeConnected={(isConnected) => setisConnected(isConnected)} userProgram={userProgram} verify_program={verify_program} compile_info={compile_info} changeInfo={(compile_info) => setcompile_info(compile_info)}></Codeparameter>
+                {/* <Codeparameter changeConnected={(isConnected) => setisConnected(isConnected)} userProgram={userProgram} verify_program={verify_program} compile_info={compile_info} changeInfo={(compile_info) => setTimeout(()=>{setcompile_info(compile_info)},0)}></Codeparameter> */}
+                {/* <Codeparameter changeConnected={(isConnected) => setisConnected(isConnected)} userProgram={userProgram} verify_program={verify_program} compile_info={compile_info} changeInfo={changeInfo}></Codeparameter> */}
                 <input type="file" className="file" onChange={my_fileReader} id="file-upload" style={{ display: 'none' }} />
                 <input type="file" className="file" onChange={my_fileReader2} id="file-upload2" style={{ display: 'none' }} />
             </div>
