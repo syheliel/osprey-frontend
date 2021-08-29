@@ -769,7 +769,7 @@ export const Footer10DataSource = {
     children: (
       <span>
         <span>
-          <span>©2021 by ECNU Osprey&nbsp;All Rights Reserved</span>
+          <span>©2021 by Osprey&nbsp;All Rights Reserved</span>
         </span>
       </span>
     ),

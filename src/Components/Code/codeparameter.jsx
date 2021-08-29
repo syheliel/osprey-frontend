@@ -169,26 +169,6 @@ function Codeparameter(props) {
                     <Row gutter={16}>
                         <Col span={12}>
                             <Form.Item
-                                name="tinyram_input_size_bound"
-                                label="Tinyram_input_size_bound"
-                                rules={[{ required: true, message: 'Please enter Tinyram input size bound' }]}
-                            >
-                                <Input placeholder={values.tinyram_input_size_bound} onChange={onChange} name="tinyram_input_size_bound" value={values.tinyram_input_size_bound} />
-                            </Form.Item>
-                        </Col>
-                        <Col span={12}>
-                            <Form.Item
-                                name="program"
-                                label="Program"
-                                rules={[{ required: true, message: 'Please enter Program' }]}
-                            >
-                                <Input placeholder={values.program} onChange={onChange} name="program" value={values.program} />
-                            </Form.Item>
-                        </Col>
-                    </Row>
-                    <Row gutter={16}>
-                        <Col span={12}>
-                            <Form.Item
                                 name="time_bound"
                                 label="Time_bound"
                                 rules={[{ required: true, message: 'Please enter Time bound' }]}
@@ -203,6 +183,17 @@ function Codeparameter(props) {
                                 rules={[{ required: true, message: 'Please enter Tinyram_program_size_bound' }]}
                             >
                                 <Input placeholder={values.tinyram_program_size_bound} onChange={onChange} name="tinyram_program_size_bound" value={values.tinyram_program_size_bound} />
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                    <Row gutter={16}>
+                        <Col span={12}>
+                            <Form.Item
+                                name="tinyram_input_size_bound"
+                                label="Tinyram_input_size_bound"
+                                rules={[{ required: true, message: 'Please enter Tinyram input size bound' }]}
+                            >
+                                <Input placeholder={values.tinyram_input_size_bound} onChange={onChange} name="tinyram_input_size_bound" value={values.tinyram_input_size_bound} />
                             </Form.Item>
                         </Col>
                     </Row>
